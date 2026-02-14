@@ -85,13 +85,28 @@ button {
 
 .message-sub {
   position: absolute;
-  top: 60%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 30px;
   color: #ff99c8;
   text-shadow: 0 0 10px #ff4da6;
   animation: glowSub 2s infinite alternate;
+}
+
+/* Mensaje largo */
+.message-extra {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #ffb3c6;
+  width: 80%;
+  text-align: center;
+  line-height: 1.4em;
+  text-shadow: 0 0 5px #ff4da6;
+  animation: glowExtra 3s infinite alternate;
 }
 
 @keyframes glow {
@@ -101,6 +116,10 @@ button {
 @keyframes glowSub {
   from { text-shadow: 0 0 5px #ff4da6; }
   to { text-shadow: 0 0 20px #ff99c8; }
+}
+@keyframes glowExtra {
+  from { text-shadow: 0 0 5px #ff4da6; }
+  to { text-shadow: 0 0 15px #ff99c8; }
 }
 
 /* Luna brillante de fondo */
@@ -143,7 +162,7 @@ button {
   top: 50%;
   left: 50%;
   transform: rotateY(calc(var(--i) * 45deg)) translateZ(200px);
-  font-size: 20px;
+  font-size: 30px; /* Aumentado de 20px a 30px */
   color: white;
   text-shadow: 0 0 10px white, 0 0 20px #ff4da6;
 }
@@ -170,6 +189,11 @@ button {
   <!-- Mensaje central -->
   <div class="message">Nicole 💖<br>Te Amo ✨</div>
   <div class="message-sub">Eres el amor de mi vida y te amo con todo mi corazón 💕🌙💖</div>
+
+  <!-- Mensaje largo -->
+  <div class="message-extra">
+Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabesh cuanto te amo y te quelo mi bebe emosha eresh lo mas importante en mi vida nunca lo olvides otei?❤️💖😍 te amo con todo mi corazón mi niña emosha pishosha tal vez esto ño sea mucho pidon 🥺 gachas por todo bebe y pidon por tan poco que tengo para darte esto al lado de otra cosa es una mrd veda pero puesh pidoname bebe 😘💝 solo queria que supieras que siempre te voy a amar con toda mi alma❤️💖💫💞
+  </div>
 
   <!-- Mensajes girando -->
   <div class="orbit-ring">
