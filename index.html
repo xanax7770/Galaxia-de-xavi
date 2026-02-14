@@ -61,19 +61,84 @@ button {
   border-radius: 20px;
   cursor: pointer;
 }
+  <style>
+Body {
+  margin: 0;
+  background: black;
+}
+.galaxy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  animation: spinGalaxy 30s linear infinite;
+}
+
+.center-name {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  font-size: 75px;
+  color: #ff4da6;
+  text-shadow: 0 0 30px #ff0066, 0 0 60px #ff0066;
+}
+
+.orbit-ring {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  transform-style: preserve-3d;
+}
+
+.orbit-ring span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:
+    rotateY(calc(var(--i) * 45deg))
+    translateZ(250px);
+  color: white;
+  font-size: 20px;
+  text-shadow: 0 0 10px white, 0 0 20px #ff4da6;
+}
+
+@keyframes spinGalaxy {
+  from { transform: translate(-50%, -50%) rotateY(0deg); }
+  to { transform: translate(-50%, -50%) rotateY(360deg); }
+}
+
+</style>
 </style>
 </head>
 <body>
 
-<div id="universe"></div>
 
-<div class="message">
-  Para ti ❤️<br>
-  — De Xavi ✨
-  <div class="teamo">Te Amo 💖</div>
-  <button onclick="mensaje()">Mensaje secreto</button>
+<div id="universe">
+
+  <div class="galaxy">
+
+    <div class="center-name">Nicole 💖</div>
+
+    <div class="orbit-ring">
+      <span style="--i:0">Mi universo ✨</span>
+      <span style="--i:1">Mi lugar seguro 🌙</span>
+      <span style="--i:2">Mi felicidad 💕</span>
+      <span style="--i:3">Mi estrella favorita 🌟</span>
+      <span style="--i:4">Mi todo 💖</span>
+      <span style="--i:5">Mi destino ✨</span>
+      <span style="--i:6">Mi razón 🌌</span>
+      <span style="--i:7">Mi siempre 💞</span>
+    </div>
+
+  </div>
+
+  <audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+  </audio>
+
 </div>
-
 <script>
 const universe = document.getElementById("universe");
 
