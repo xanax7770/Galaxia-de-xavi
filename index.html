@@ -46,6 +46,18 @@ button {
   transform-style: preserve-3d;
 }
 
+/* Imagen en esquina superior izquierda */
+#topImage {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 80px;
+  height: auto;
+  z-index: 200;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ffffff;
+}
+
 /* Estrellas fijas */
 .star {
   position: absolute;
@@ -150,8 +162,8 @@ button {
   position: absolute;
   width: 400px;
   height: 400px;
-  top: 47%; /* antes 50%, ahora subido un poco para centrar mejor */
-  left: 50%;
+  top: 47%;
+  left: 53%;
   transform: translate(-50%, -50%);
   transform-style: preserve-3d;
   animation: spin 20s linear infinite;
@@ -162,7 +174,7 @@ button {
   top: 50%;
   left: 50%;
   transform: rotateY(calc(var(--i) * 45deg)) translateZ(200px);
-  font-size: 30px; /* tamaño grande para visibilidad */
+  font-size: 30px;
   color: white;
   text-shadow: 0 0 10px white, 0 0 20px #ff4da6;
 }
@@ -174,6 +186,9 @@ button {
 </style>
 </head>
 <body>
+
+<!-- Imagen arriba a la izquierda -->
+<img id="topImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS7UFnnnS-73etBhFKWuE4A8GcXcKZcPBAQpky50FGYGq01pULEDKPF_s&s=10" alt="Imagen especial">
 
 <div id="login">
   <h2>🔐 Solo alguien especial puede entrar</h2>
@@ -216,7 +231,7 @@ Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabes
 <script>
 function check() {
   let pass = document.getElementById("password").value.toLowerCase();
-  if(pass === "nicole") {
+  if(pass === "bebe emosha") {  // nueva contraseña
     document.getElementById("login").style.display = "none";
     document.getElementById("universe").style.display = "block";
     crearUniverso();
