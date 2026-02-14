@@ -169,6 +169,38 @@ button {
   from { text-shadow: 0 0 5px #ff4da6; }
   to { text-shadow: 0 0 15px #ff99c8; }
 }
+
+/* Movimiento circular suave de los mensajes */
+@keyframes orbitMessage {
+  0%   { transform: translate(-50%, -50%) rotate(0deg) translateX(5px) rotate(0deg); }
+  50%  { transform: translate(-50%, -50%) rotate(180deg) translateX(5px) rotate(-180deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(5px) rotate(-360deg); }
+}
+
+.message {
+  animation: glow 2s infinite alternate, orbitMessage 10s linear infinite;
+}
+
+.message-sub {
+  animation: glowSub 2s infinite alternate, orbitMessage 12s linear infinite reverse;
+}
+
+/* Botón de música */
+#playMusic {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #ff4da6;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1000;
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -198,9 +230,13 @@ Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabes
   <div class="rose" style="top:75%; left:50%; transform: translateZ(0);"></div>
   <div class="rose" style="top:65%; left:65%; transform: translateZ(0);"></div>
 
+  <!-- Música -->
   <audio id="music" loop>
-  <source src="did_i_tell_u_that_i_miss_u.mp3" type="audio/mp3">
-</audio>
+    <source src="did_i_tell_u_that_i_miss_u.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Botón para reproducir música -->
+  <button id="playMusic">🎵 Reproducir música</button>
 </div>
 
 <script>
@@ -210,7 +246,15 @@ function check() {
     document.getElementById("login").style.display = "none";
     document.getElementById("universe").style.display = "block";
     crearUniverso();
-    document.getElementById("music").play();
+
+    // Mostrar botón de música
+    const playBtn = document.getElementById("playMusic");
+    playBtn.style.display = "block";
+    playBtn.addEventListener('click', () => {
+      document.getElementById("music").play();
+      playBtn.style.display = "none"; // ocultar el botón después de reproducir
+    });
+
   } else {
     document.getElementById("error").innerText = "Clave incorrecta 💔";
   }
