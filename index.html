@@ -2,169 +2,140 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Galaxia de Nicole</title>
+<title>Acceso Especial</title>
 <style>
-html, body {
+body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
   background: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
   overflow: hidden;
-  font-family: sans-serif;
+}
+
+#login {
+  position: absolute;
+  width: 100%;
+  top: 40%;
+}
+
+input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #ff0066;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 #universe {
-  perspective: 1200px;
+  display: none;
+  position: absolute;
   width: 100%;
   height: 100%;
+  perspective: 1000px;
   transform-style: preserve-3d;
-}
-
-.galaxy {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-style: preserve-3d;
-  transform: translate(-50%, -50%);
-}
-
-.center-name {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 10vw;
-  color: #ff4da6;
-  text-shadow: 0 0 20px #ff0066, 0 0 40px #ff4da6;
-  animation: pulse 2s infinite alternate;
-  text-align: center;
-}
-
-@keyframes pulse {
-  from { text-shadow: 0 0 20px #ff0066, 0 0 40px #ff4da6; }
-  to   { text-shadow: 0 0 40px #ff0066, 0 0 80px #ff4da6; }
-}
-
-.orbit-ring {
-  position: relative;
-  width: 60vw;
-  height: 60vw;
-  max-width: 400px;
-  max-height: 400px;
-  transform-style: preserve-3d;
-}
-
-.orbit-ring span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: rotateY(calc(var(--i) * 45deg)) translateZ(25vw);
-  color: white;
-  font-size: 3vw;
-  text-shadow: 0 0 5px white, 0 0 10px #ff4da6;
-  white-space: nowrap;
 }
 
 .star {
   position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
   border-radius: 50%;
-  opacity: 0.9;
-  animation: twinkle 2s infinite alternate;
 }
 
-@keyframes twinkle {
-  from { opacity: 0.3; }
-  to   { opacity: 1; }
+.shooting {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  box-shadow: 0 0 10px white;
+  animation: shoot 1s linear forwards;
+}
+
+@keyframes shoot {
+  from { transform: translate(0,0); opacity: 1; }
+  to { transform: translate(300px,300px); opacity: 0; }
+}
+
+.message {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+  color: #ff4da6;
+  text-shadow: 0 0 20px #ff4da6;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff4da6; }
+  to { text-shadow: 0 0 40px #ff0066; }
 }
 </style>
 </head>
 <body>
 
+<div id="login">
+  <h2>🔐 Solo alguien especial puede entrar</h2>
+  <input type="password" id="password" placeholder="Ingresa la clave">
+  <button onclick="check()">Entrar</button>
+  <p id="error" style="color:red;"></p>
+</div>
+
 <div id="universe">
-  <div class="galaxy">
-    <div class="center-name">Nicole</div>
-    <div class="orbit-ring">
-      <span style="--i:0">Mi universo ✨</span>
-      <span style="--i:1">Mi lugar seguro 🌙</span>
-      <span style="--i:2">Mi felicidad 💕</span>
-      <span style="--i:3">Mi estrella favorita 🌟</span>
-      <span style="--i:4">Mi todo 💖</span>
-      <span style="--i:5">Mi destino ✨</span>
-      <span style="--i:6">Mi razón 🌌</span>
-      <span style="--i:7">Mi siempre 💞</span>
-    </div>
-  </div>
+  <div class="message">Nicole 💖<br>Te Amo ✨</div>
+  <audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+  </audio>
 </div>
 
 <script>
-const universe = document.getElementById("universe");
-const colors = ["white", "#a0c4ff", "#ffb6c1", "#ffd6a5"];
-const numStars = 300;
-let stars = [];
-
-// Crear estrellas visibles
-for (let i = 0; i < numStars; i++) {
-  const star = document.createElement("div");
-  star.className = "star";
-
-  // Tamaño mínimo visible
-  const size = Math.random() * 2 + 2; 
-  star.style.width = size + "px";
-  star.style.height = size + "px";
-  star.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-  // Posición inicial
-  const angle = Math.random() * 2 * Math.PI;
-  const radius = Math.random() * 120 + 50; // radio moderado
-  const height = (Math.random() - 0.5) * 80; // altura moderada
-  const speed = Math.random() * 0.02 + 0.002;
-
-  star.dataset.angle = angle;
-  star.dataset.radius = radius;
-  star.dataset.height = height;
-  star.dataset.speed = speed;
-
-  universe.appendChild(star);
-  stars.push(star);
+function check() {
+  let pass = document.getElementById("password").value.toLowerCase();
+  if(pass === "nicole") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("universe").style.display = "block";
+    crearUniverso();
+    document.getElementById("music").play();
+  } else {
+    document.getElementById("error").innerText = "Clave incorrecta 💔";
+  }
 }
 
-// Animar estrellas
-function animateStars() {
-  stars.forEach(star => {
-    let angle = parseFloat(star.dataset.angle);
-    const radius = parseFloat(star.dataset.radius);
-    const height = parseFloat(star.dataset.height);
-    const speed = parseFloat(star.dataset.speed);
-    angle += speed;
-    star.dataset.angle = angle;
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
+function crearUniverso() {
+  const universe = document.getElementById("universe");
 
-    // Centrar cada estrella y usar translate3d
-    star.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${height}px, ${z}px)`;
-  });
-  requestAnimationFrame(animateStars);
+  for (let i = 0; i < 400; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.transform = "translateZ(" + (Math.random() * 500) + "px)";
+    universe.appendChild(star);
+  }
+
+  setInterval(() => {
+    let shooting = document.createElement("div");
+    shooting.className = "shooting";
+    shooting.style.top = Math.random() * 50 + "vh";
+    shooting.style.left = Math.random() * 50 + "vw";
+    document.body.appendChild(shooting);
+
+    setTimeout(() => shooting.remove(), 1000);
+  }, 3000);
 }
-animateStars();
-
-// Movimiento táctil
-let startX, startY, rotationX = 0, rotationY = 0;
-document.addEventListener("touchstart", e => {
-  const touch = e.touches[0];
-  startX = touch.clientX;
-  startY = touch.clientY;
-});
-document.addEventListener("touchmove", e => {
-  const touch = e.touches[0];
-  const deltaX = touch.clientX - startX;
-  const deltaY = touch.clientY - startY;
-  rotationY += deltaX * 0.3;
-  rotationX -= deltaY * 0.3;
-  universe.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
-  startX = touch.clientX;
-  startY = touch.clientY;
-});
 </script>
 
 </body>
