@@ -46,13 +46,14 @@ button {
   transform-style: preserve-3d;
 }
 
-/* Imagen en esquina superior izquierda, tamaño y posición ajustados */
+/* Imagen en esquina superior izquierda, tamaño más grande */
 #topImage {
   position: absolute;
   top: 10px;
-  left: 30px;      /* un poco más a la derecha */
-  width: 100px;     /* más grande */
-  height: auto;
+  left: 30px;       /* un poco más a la derecha */
+  width: 150px;      /* más grande */
+  height: 150px;     /* más grande */
+  object-fit: cover; /* mantiene proporción */
   z-index: 200;
   border-radius: 50%;
   box-shadow: 0 0 10px #ffffff;
@@ -121,17 +122,15 @@ button {
   animation: glowExtra 3s infinite alternate;
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 10px #ff4da6; }
-  to { text-shadow: 0 0 40px #ff0066; }
-}
-@keyframes glowSub {
-  from { text-shadow: 0 0 5px #ff4da6; }
-  to { text-shadow: 0 0 20px #ff99c8; }
-}
-@keyframes glowExtra {
-  from { text-shadow: 0 0 5px #ff4da6; }
-  to { text-shadow: 0 0 15px #ff99c8; }
+/* Texto gigante abajo */
+.message-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  color: #ff4da6;
+  text-shadow: 0 0 20px #ff4da6, 0 0 40px #ff0066;
 }
 
 /* Luna brillante de fondo */
@@ -183,6 +182,38 @@ button {
   from { transform: translate(-50%, -50%) rotateY(0deg); }
   to { transform: translate(-50%, -50%) rotateY(360deg); }
 }
+
+/* Corazón gigante que late */
+.heart {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  font-size: 120px;
+  color: #ff4da6;
+  text-shadow: 0 0 20px #ff4da6, 0 0 40px #ff0066;
+  animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  25% { transform: translate(-50%, -50%) scale(1.2); }
+  50% { transform: translate(-50%, -50%) scale(1); }
+  75% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff4da6; }
+  to { text-shadow: 0 0 40px #ff0066; }
+}
+@keyframes glowSub {
+  from { text-shadow: 0 0 5px #ff4da6; }
+  to { text-shadow: 0 0 20px #ff99c8; }
+}
+@keyframes glowExtra {
+  from { text-shadow: 0 0 5px #ff4da6; }
+  to { text-shadow: 0 0 15px #ff99c8; }
+}
 </style>
 </head>
 <body>
@@ -222,16 +253,22 @@ Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabes
     <span style="--i:7">Mi siempre 💞</span>
   </div>
 
+  <!-- Corazón gigante que late -->
+  <div class="heart">❤️</div>
+
+  <!-- Texto gigante abajo -->
+  <div class="message-bottom">GACHASH POR TODO MI BEBE EMOSHA 💖✨</div>
+
   <!-- Música -->
   <audio id="music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    <source src="did_i_tell_u_that_i_miss_u.mp3" type="audio/mp3">
   </audio>
 </div>
 
 <script>
 function check() {
   let pass = document.getElementById("password").value.toLowerCase();
-  if(pass === "bebe emosha") {  // nueva contraseña
+  if(pass === "bebe emosha") {  // contraseña nueva
     document.getElementById("login").style.display = "none";
     document.getElementById("universe").style.display = "block";
     crearUniverso();
