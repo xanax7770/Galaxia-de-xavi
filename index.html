@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Galaxia de Amor</title>
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #14001f, #000000);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+.message {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 42px;
+  animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.sub {
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+.teamo {
+  font-size: 50px;
+  color: #ff4da6;
+  opacity: 0;
+  animation: showLove 4s 3s forwards;
+}
+
+@keyframes showLove {
+  to { opacity: 1; }
+}
+
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 24px;
+  animation: floatUp 2s linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #ff0066;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="message">
+  Para ti ❤️<br>
+  <div class="sub">— De Xavi ✨</div>
+  <div class="teamo">Te Amo 💖</div>
+  <button onclick="mensajeSecreto()">Mensaje secreto</button>
+</div>
+
+<script>
+const starsContainer = document.querySelector('.stars');
+
+for (let i = 0; i < 250; i++) {
+  const star = document.createElement('div');
+  star.classList.add('star');
+  star.style.top = Math.random() * 100 + '%';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+  starsContainer.appendChild(star);
+}
+
+// Corazones al tocar pantalla
+document.addEventListener("click", function(e) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = e.clientX + "px";
+  heart.style.top = e.clientY + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 2000);
+});
+
+function mensajeSecreto() {
+  alert("Eres lo mejor que me ha pasado 💕");
+}
+</script>
+
+</body>
+</html>
