@@ -46,14 +46,14 @@ button {
   transform-style: preserve-3d;
 }
 
-/* Imagen en esquina superior izquierda, tamaño más grande */
+/* Imagen en esquina superior izquierda */
 #topImage {
   position: absolute;
   top: 10px;
-  left: 30px;       /* un poco más a la derecha */
-  width: 150px;      /* más grande */
-  height: 150px;     /* más grande */
-  object-fit: cover; /* mantiene proporción */
+  left: 50px;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
   z-index: 200;
   border-radius: 50%;
   box-shadow: 0 0 10px #ffffff;
@@ -84,13 +84,32 @@ button {
   to { transform: translateY(600px) translateX(-50px); opacity: 0; }
 }
 
+/* Estrellas fugaces */
+.shooting-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white, 0 0 20px #ff4da6;
+  opacity: 0;
+  transform: translate(0,0);
+  animation: shoot-star 1s linear forwards;
+  z-index: 500;
+}
+
+@keyframes shoot-star {
+  0% { transform: translate(0,0); opacity: 1; }
+  100% { transform: translate(300px, 300px); opacity: 0; }
+}
+
 /* Mensaje central */
 .message {
   position: absolute;
   top: 40%;
-  left: 50%;
+  left: 53%;
   transform: translate(-50%, -50%);
-  font-size: 60px;
+  font-size: 70px;
   color: #ff4da6;
   text-shadow: 0 0 20px #ff4da6;
   animation: glow 2s infinite alternate;
@@ -99,9 +118,9 @@ button {
 .message-sub {
   position: absolute;
   top: 55%;
-  left: 50%;
+  left: 53%;
   transform: translate(-50%, -50%);
-  font-size: 30px;
+  font-size: 35px;
   color: #ff99c8;
   text-shadow: 0 0 10px #ff4da6;
   animation: glowSub 2s infinite alternate;
@@ -133,7 +152,7 @@ button {
   text-shadow: 0 0 20px #ff4da6, 0 0 40px #ff0066;
 }
 
-/* Luna brillante de fondo */
+/* Luna brillante */
 .moon {
   position: absolute;
   top: 10%;
@@ -173,7 +192,7 @@ button {
   top: 50%;
   left: 50%;
   transform: rotateY(calc(var(--i) * 45deg)) translateZ(200px);
-  font-size: 30px;
+  font-size: 40px;
   color: white;
   text-shadow: 0 0 10px white, 0 0 20px #ff4da6;
 }
@@ -218,7 +237,6 @@ button {
 </head>
 <body>
 
-<!-- Imagen arriba a la izquierda -->
 <img id="topImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS7UFnnnS-73etBhFKWuE4A8GcXcKZcPBAQpky50FGYGq01pULEDKPF_s&s=10" alt="Imagen especial">
 
 <div id="login">
@@ -229,19 +247,15 @@ button {
 </div>
 
 <div id="universe">
-  <!-- Luna brillante -->
   <div class="moon"></div>
 
-  <!-- Mensaje central -->
   <div class="message">Nicole 💖<br>Te Amo ✨</div>
   <div class="message-sub">Eres el amor de mi vida y te amo con todo mi corazón 💕🌙💖</div>
 
-  <!-- Mensaje largo -->
   <div class="message-extra">
 Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabesh cuanto te amo y te quelo mi bebe emosha eresh lo mas importante en mi vida nunca lo olvides otei?❤️💖😍 te amo con todo mi corazón mi niña emosha pishosha tal vez esto ño sea mucho pidon 🥺 gachas por todo bebe y pidon por tan poco que tengo para darte esto al lado de otra cosa es una mrd veda pero puesh pidoname bebe 😘💝 solo queria que supieras que siempre te voy a amar con toda mi alma❤️💖💫💞
   </div>
 
-  <!-- Mensajes girando -->
   <div class="orbit-ring">
     <span style="--i:0">Mi universo ✨</span>
     <span style="--i:1">Mi lugar seguro 🌙</span>
@@ -253,22 +267,19 @@ Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabes
     <span style="--i:7">Mi siempre 💞</span>
   </div>
 
-  <!-- Corazón gigante que late -->
   <div class="heart">❤️</div>
 
-  <!-- Texto gigante abajo -->
   <div class="message-bottom">GACHASH POR TODO MI BEBE EMOSHA 💖✨</div>
 
-  <!-- Música -->
   <audio id="music" loop>
-    <source src="did_i_tell_u_that_i_miss_u.mp3" type="audio/mp3">
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
   </audio>
 </div>
 
 <script>
 function check() {
   let pass = document.getElementById("password").value.toLowerCase();
-  if(pass === "bebe emosha") {  // contraseña nueva
+  if(pass === "bebe emosha") {
     document.getElementById("login").style.display = "none";
     document.getElementById("universe").style.display = "block";
     crearUniverso();
@@ -300,6 +311,16 @@ function crearUniverso() {
     universe.appendChild(shooting);
     setTimeout(() => shooting.remove(), 1500);
   }, 200);
+
+  // Estrellas fugaces
+  setInterval(() => {
+    let star = document.createElement("div");
+    star.className = "shooting-star";
+    star.style.top = Math.random() * window.innerHeight * 0.5 + "px";
+    star.style.left = Math.random() * window.innerWidth * 0.8 + "px";
+    universe.appendChild(star);
+    setTimeout(() => star.remove(), 1000);
+  }, 3000);
 }
 </script>
 
