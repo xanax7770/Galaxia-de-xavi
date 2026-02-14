@@ -160,13 +160,13 @@ button {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Corazón gigante latiendo grande y corregido */
-#big-heart {
+/* Corazón grande latiendo y brillando */
+#top-heart {
   position: absolute;
-  top: 50%;
+  top: 30%; /* justo arriba del mensaje */
   left: 50%;
-  width: 150px;  
-  height: 150px;  
+  width: 150px;
+  height: 150px;
   background: red;
   clip-path: polygon(
     50% 0%, 61% 7%, 68% 15%, 75% 25%, 78% 35%, 78% 50%,
@@ -174,7 +174,7 @@ button {
     25% 60%, 22% 50%, 22% 35%, 25% 25%, 32% 15%, 39% 7%
   );
   transform-origin: center center;
-  animation: heartbeat 1s infinite;
+  animation: heartbeat 1s infinite, shineHeart 2s infinite alternate;
   z-index: 300;
 }
 @keyframes heartbeat {
@@ -182,6 +182,10 @@ button {
   25% { transform: translate(-50%, -50%) scale(1.2); }
   50% { transform: translate(-50%, -50%) scale(1.3); }
   75% { transform: translate(-50%, -50%) scale(1.2); }
+}
+@keyframes shineHeart {
+  from { box-shadow: 0 0 20px #ff4da6, 0 0 40px #ff99c8; }
+  to { box-shadow: 0 0 40px #ff66ff, 0 0 60px #ff99cc; }
 }
 
 /* Imagen arriba izquierda */
@@ -210,14 +214,15 @@ button {
   
   <div class="moon"></div>
   
+  <!-- Corazón grande latiendo y brillando arriba del mensaje -->
+  <div id="top-heart"></div>
+  
   <div class="message">Nicole 💖✨💫<br>Te Amo 😘💌</div>
   <div class="message-sub">Eres el amor de mi vida y te amo con todo mi corazón 💕🌙💖</div>
   
   <div class="message-extra">
 Gracias por todo este tiempo que me permitiste estar a tu lado enserio ño sabesh cuanto te amo y te quelo mi bebe emosha eresh lo mas importante en mi vida nunca lo olvides otei?❤️💖😍 te amo con todo mi corazón mi niña emosha pishosha tal vez esto ño sea mucho pidon 🥺 gachas por todo bebe y pidon por tan poco que tengo para darte esto al lado de otra cosa es una mrd veda pero puesh pidoname bebe 😘💝 solo queria que supieras que siempre te voy a amar con toda mi alma❤️💖💫💞
   </div>
-  
-  <div id="big-heart"></div>
   
   <!-- Mensajes giratorios adicionales -->
   <div class="rotating-message" style="top:92%;">mi bebe enojona</div>
