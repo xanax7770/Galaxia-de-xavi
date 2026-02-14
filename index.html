@@ -138,12 +138,16 @@ button {
   width: 80%;
   text-align: center;
   line-height: 1.4em;
+  animation: shineExtra 2s infinite alternate;
+}
+@keyframes shineExtra {
+  from { text-shadow: 0 0 5px #ff4da6, 0 0 10px #ff99c8; color: #ffb3c6; }
+  to { text-shadow: 0 0 20px #ffffff, 0 0 35px #ff4da6; color: #ff99c8; }
 }
 
 /* Mensajes giratorios adicionales */
 .rotating-message {
   position: absolute;
-  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(0deg);
   font-size: 30px;
@@ -156,32 +160,28 @@ button {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Corazon gigante latiendo */
+/* Corazón gigante latiendo grande y corregido */
 #big-heart {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 150px;
-  height: 150px;
+  width: 150px;  
+  height: 150px;  
   background: red;
   clip-path: polygon(
     50% 0%, 61% 7%, 68% 15%, 75% 25%, 78% 35%, 78% 50%,
     75% 60%, 70% 68%, 60% 75%, 50% 80%, 40% 75%, 30% 68%,
     25% 60%, 22% 50%, 22% 35%, 25% 25%, 32% 15%, 39% 7%
   );
+  transform-origin: center center;
   animation: heartbeat 1s infinite;
   z-index: 300;
 }
 @keyframes heartbeat {
   0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  25% { transform: translate(-50%, -50%) scale(1.2); }
   50% { transform: translate(-50%, -50%) scale(1.3); }
-}
-
-/* Brillo del texto largo */
-@keyframes shineExtra {
-  from { text-shadow: 0 0 5px #ff4da6, 0 0 10px #ff99c8; color: #ffb3c6; }
-  to { text-shadow: 0 0 20px #ffffff, 0 0 35px #ff4da6; color: #ff99c8; }
+  75% { transform: translate(-50%, -50%) scale(1.2); }
 }
 
 /* Imagen arriba izquierda */
@@ -268,13 +268,6 @@ function crearUniverso() {
     document.body.appendChild(shooting);
     setTimeout(() => shooting.remove(), 1000);
   }, 3000);
-
-  // Brillo/parpadeo aleatorio del texto largo
-  const longText = document.querySelector('.message-extra');
-  let duration = 1 + Math.random() * 2;
-  let delay = Math.random() * 2;
-  longText.style.animation = `shineExtra ${duration}s infinite alternate`;
-  longText.style.animationDelay = `${delay}s`;
 }
 </script>
 
