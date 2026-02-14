@@ -90,11 +90,17 @@ button {
   font-size: 30px;
   color: #ff99c8;
   text-shadow: 0 0 10px #ff4da6;
+  animation: glowSub 2s infinite alternate;
 }
 
 @keyframes glow {
   from { text-shadow: 0 0 10px #ff4da6; }
   to { text-shadow: 0 0 40px #ff0066; }
+}
+
+@keyframes glowSub {
+  from { text-shadow: 0 0 5px #ff4da6; }
+  to { text-shadow: 0 0 20px #ff99c8; }
 }
 
 /* Luna de fondo con brillo y flotación */
@@ -120,6 +126,28 @@ button {
   from { transform: translateY(0px); }
   to   { transform: translateY(20px); }
 }
+
+/* Rosas que florecen y flotan */
+.rose {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: url('https://i.imgur.com/Ou4h0dF.png') no-repeat center/contain; /* rosa cerrada */
+  cursor: pointer;
+  transition: transform 1s ease, box-shadow 0.5s ease;
+  z-index: 5;
+  animation: roseFloat 4s ease-in-out infinite alternate;
+}
+
+.rose.flower {
+  transform: scale(2); /* florece aumentando tamaño */
+  box-shadow: 0 0 20px #ff4da6;
+}
+
+@keyframes roseFloat {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(15px); }
+}
 </style>
 </head>
 <body>
@@ -137,6 +165,11 @@ button {
 
   <div class="message">Nicole 💖<br>Te Amo ✨</div>
   <div class="message-sub">Eres el amor de mi vida y te amo con todo mi corazón 💕</div>
+
+  <!-- Rosas flotantes que florecen -->
+  <div class="rose" style="top:70%; left:30%;"></div>
+  <div class="rose" style="top:75%; left:50%;"></div>
+  <div class="rose" style="top:65%; left:65%;"></div>
 
   <audio id="music" loop>
     <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
@@ -177,6 +210,17 @@ function crearUniverso() {
     setTimeout(() => shooting.remove(), 1000);
   }, 3000);
 }
+
+// Hacer que las rosas florezcan al tocar/clic
+document.querySelectorAll('.rose').forEach(rose => {
+  rose.addEventListener('click', () => {
+    rose.classList.toggle('flower');
+  });
+
+  rose.addEventListener('touchstart', () => {
+    rose.classList.toggle('flower');
+  });
+});
 </script>
 
 </body>
