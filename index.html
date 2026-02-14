@@ -7,30 +7,23 @@
 body {
   margin: 0;
   overflow: hidden;
-  background: radial-gradient(circle at center, #14001f, #000000);
+  background: black;
   font-family: Arial, sans-serif;
   color: white;
   text-align: center;
 }
 
-.stars {
+.galaxy {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, #4b0082, #000000 70%);
+  animation: rotateGalaxy 60s linear infinite;
 }
 
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  animation: twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle {
-  from { opacity: 0.2; }
-  to { opacity: 1; }
+@keyframes rotateGalaxy {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .message {
@@ -38,43 +31,31 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 42px;
+  font-size: 45px;
+  text-shadow: 0 0 20px #ff4da6;
   animation: fadeIn 3s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -60%); }
-  to { opacity: 1; transform: translate(-50%, -50%); }
-}
-
 .sub {
-  font-size: 22px;
-  margin-top: 20px;
+  font-size: 24px;
+  margin-top: 15px;
 }
 
 .teamo {
-  font-size: 50px;
+  font-size: 55px;
   color: #ff4da6;
-  opacity: 0;
-  animation: showLove 4s 3s forwards;
+  margin-top: 20px;
+  animation: glow 2s infinite alternate;
 }
 
-@keyframes showLove {
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ff4da6; }
+  to { text-shadow: 0 0 40px #ff0066; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
   to { opacity: 1; }
-}
-
-.heart {
-  position: absolute;
-  color: pink;
-  font-size: 24px;
-  animation: floatUp 2s linear forwards;
-}
-
-@keyframes floatUp {
-  to {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
 }
 
 button {
@@ -87,47 +68,39 @@ button {
   border-radius: 20px;
   cursor: pointer;
 }
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+}
 </style>
 </head>
 <body>
 
-<div class="stars"></div>
+<div class="galaxy"></div>
 
 <div class="message">
   Para ti ❤️<br>
   <div class="sub">— De Xavi ✨</div>
   <div class="teamo">Te Amo 💖</div>
-  <button onclick="mensajeSecreto()">Mensaje secreto</button>
+  <button onclick="mensaje()">Mensaje secreto</button>
 </div>
 
 <script>
-const starsContainer = document.querySelector('.stars');
-
-for (let i = 0; i < 250; i++) {
-  const star = document.createElement('div');
-  star.classList.add('star');
-  star.style.top = Math.random() * 100 + '%';
-  star.style.left = Math.random() * 100 + '%';
-  star.style.animationDuration = (Math.random() * 3 + 1) + 's';
-  starsContainer.appendChild(star);
+// Crear estrellas aleatorias
+for (let i = 0; i < 300; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(star);
 }
 
-// Corazones al tocar pantalla
-document.addEventListener("click", function(e) {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💗";
-  heart.style.left = e.clientX + "px";
-  heart.style.top = e.clientY + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => {
-    heart.remove();
-  }, 2000);
-});
-
-function mensajeSecreto() {
-  alert("Eres lo mejor que me ha pasado 💕");
+function mensaje() {
+  alert("Contigo quiero todo el universo 💕");
 }
 </script>
 
